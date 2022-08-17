@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar header has-shadow is-primary"
+      class="navbar header is-primary"
       role="navigation"
       aria-label="main navigation"
     >
@@ -17,15 +17,37 @@
           >
         </a>
 
-        <div class="navbar-burger">
+        <!-- <div class="navbar-burger">
+          <p>aaa</p>
           <span />
           <span />
           <span />
-        </div>
+        </div> -->
       </div>
+
+    <div class="navbar-end is-flex ml-auto">
+          <b-navbar-item class="navbar-right" href="#">
+            Myページ
+          </b-navbar-item>
+          <b-navbar-item href="#">
+            お店を登録
+          </b-navbar-item>
+          <b-navbar-item href="#">
+            タイムライン
+          </b-navbar-item>
+          <b-navbar-item class="is-flex is-align-items-center">
+            ユーザーID：12345
+          </b-navbar-item>
+    </div>
+
+      
     </nav>
 
-    <section class="main-content columns">
+    <div class="container column is-10">
+        <Nuxt />
+    </div>
+
+    <!-- <section class="main-content columns">
       <aside class="column is-2 section">
         <p class="menu-label is-hidden-touch">
           General
@@ -48,7 +70,7 @@
       <div class="container column is-10">
         <Nuxt />
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
