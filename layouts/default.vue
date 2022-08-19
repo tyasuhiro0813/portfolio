@@ -26,10 +26,10 @@
       </div>
 
     <div class="navbar-end is-flex ml-auto">
-          <b-navbar-item class="navbar-right" href="#">
+          <b-navbar-item class="navbar-right" href="/mypage">
             Myページ
           </b-navbar-item>
-          <b-navbar-item href="#">
+          <b-navbar-item href="/register">
             お店を登録
           </b-navbar-item>
           <b-navbar-item href="#">
