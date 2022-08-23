@@ -22,6 +22,9 @@
 </template>
 
 <script>
+import {auth} from "../plugins/firebase"
+import {signInWithEmailAndPassword} from "firebase/auth"
+
 export default {
     layout: "login-layout",
     data(){
@@ -41,6 +44,16 @@ export default {
                 return
             }
             console.log(this.email, this.password)
+            signInWithEmailAndPassword(auth, this.email, this.password) 
+            .then((user)=> {
+                console.log(user)
+                alert("ログインしました。")
+                this.$router.push("/mypage")
+            })
+            .catch((error)=> {
+                console.log(error)
+                alert("ログインに失敗しました。")
+            })
         },
         register(){
             if(this.email === "") {
