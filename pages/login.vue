@@ -18,6 +18,8 @@
                 <b-button label="Login" type="is-primary" size="is-medium" @click="login"/>
             </p>
         </div>
+
+        <b-loading is-full-page v-show="isLoading"></b-loading>
     </section>
 </template>
 
@@ -30,7 +32,11 @@ export default {
     data(){
         return {
             email: "",
-            password: ""
+            password: "",
+            // Loading UIの表示
+            isLoading: false,
+            
+
         }
     },
     methods: {
@@ -43,15 +49,20 @@ export default {
                 alert("パスワードを入力してください。")
                 return
             }
+            this.isLoading = true
             console.log(this.email, this.password)
             signInWithEmailAndPassword(auth, this.email, this.password) 
             .then((user)=> {
                 console.log(user)
+                // storeにuseridを入れる
+                this.$store.commit("setUid", user.user.uid)
+                this.isLoading = false
                 alert("ログインしました。")
                 this.$router.push("/mypage")
             })
             .catch((error)=> {
                 console.log(error)
+                this.isLoading = false
                 alert("ログインに失敗しました。")
             })
         },
@@ -66,6 +77,9 @@ export default {
             }
             console.log(this.email, this.password)
         }
-    } 
+    },
+    mounted() {
+        console.log(this.$store.state.uid)
+    },    
 }
 </script>

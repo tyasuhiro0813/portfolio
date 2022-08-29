@@ -41,7 +41,7 @@ export default {
             rate: "",
             date: "2022/08/24",
             time: "19:00",
-            member: "4",
+            number: "4",
             recommend: ""
         }
     }
