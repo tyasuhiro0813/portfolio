@@ -27,6 +27,9 @@
 import {auth} from "../plugins/firebase"
 import {signInWithEmailAndPassword} from "firebase/auth"
 
+// 新しいユーザー登録_20220904
+import {createUserWithEmailAndPassword } from "firebase/auth"
+
 export default {
     layout: "login-layout",
     data(){
@@ -75,7 +78,25 @@ export default {
                 alert("パスワードを入力してください。")
                 return
             }
+            this.isLoading = true
             console.log(this.email, this.password)
+            createUserWithEmailAndPassword(auth, this.email, this.password)
+            .then((user) => {
+                // Signed in
+                this.$store.commit("setUid", user.user.uid)
+                this.isLoading = false
+                alert("新規登録しました。")
+                this.$router.push("/mypage")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+                console.log(error)
+                this.isLoading = false
+                alert("新規登録に失敗しました。")
+            });
+
         }
     },
     mounted() {

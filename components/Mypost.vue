@@ -14,7 +14,24 @@
                 評価： {{ rate }}
             </section>
         </section>
-        <section class="control column is-half is-justify-content-center">
+        <section class="is-flex">
+            <figure class="image is-128x128">
+                <img
+                src="~/assets/ramen.JPG"
+                >
+            </figure>
+            <figure class="image is-128x128">
+                <img
+                src="~/assets/ramen.JPG"
+                >
+            </figure>
+            <figure class="image is-128x128">
+                <img
+                src="~/assets/ramen.JPG"
+                >
+            </figure>
+        </section>
+        <!-- <section class="control column is-half is-justify-content-center">
             <section>
                 行った日： {{ date }}
             </section>
@@ -27,7 +44,7 @@
             <section>
                 おすすめ： {{ recommend }}
             </section>
-        </section>
+        </section> -->
     </section>
 </template>
 

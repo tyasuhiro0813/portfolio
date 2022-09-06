@@ -32,7 +32,7 @@
           <b-navbar-item href="/register">
             お店を登録
           </b-navbar-item>
-          <b-navbar-item href="#">
+          <b-navbar-item href="/timeline">
             タイムライン
           </b-navbar-item>
           <b-navbar-item class="is-flex is-align-items-center">

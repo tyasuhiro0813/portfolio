@@ -1,14 +1,17 @@
 <template>
+    
     <section>
-        <section class="is-flex section container column">
+        <section class="is-flex">
+            <section>
+                <b-loading is-full-page v-show="isLoading"></b-loading>
+            </section>
             <section class="section container column is-half">
                 <b-field label="店名" horizontal>
                     <b-input v-model="name"></b-input>
                 </b-field>
 
                 <b-field label="エリア" horizontal>
-                    <b-input v-model="area" maxlength="30">
-                    </b-input>
+                    <b-input v-model="area" maxlength="30"></b-input>
                 </b-field>
 
                 <b-field label="ジャンル" horizontal>
@@ -17,6 +20,10 @@
 
                 <b-field label="評価" horizontal>
                     <b-rate v-model="rate"></b-rate>
+                </b-field>
+
+                <b-field label="投稿画像" horizontal>
+                    <input type="file" ref="preview" @change="uploadFile">
                 </b-field>
             </section>
 
@@ -34,10 +41,12 @@
                 </b-field>
 
                 <b-field label="おすすめ" horizontal>
-                    <b-input v-model="recommend">
-
-                    </b-input>
+                    <b-input v-model="recommend"></b-input>
                 </b-field>
+                <div v-if="url" class="is-flex">
+                    <img :src="url">
+                    <img :src="url">
+                </div>
             </section>
         </section>
         
@@ -49,10 +58,14 @@
                 <b-switch v-model="share"> タイムラインでシェア </b-switch>
             </p>
         </section>
+        
     </section>
 </template>
 
 <script>
+import { collection, addDoc } from "firebase/firestore"
+import {db} from "../plugins/firebase"
+
 export default {
     data(){
         return {
@@ -64,7 +77,9 @@ export default {
             time: "",
             member: "",
             recommend: "",
-            share: false
+            share: false,
+            url: "",
+            isLoading: false
         }
     },
     methods: {
@@ -101,7 +116,26 @@ export default {
                 alert("未入力項目があります。")
                 return
             }
-            console.log(this.name, this.rate, this.date, this.time, this.share)
+            // console.log(this.name, this.rate, this.date, this.time, this.share)
+            this.isLoading = true
+            console.log(this.isLoading)
+            // firestoreへデータ追加
+            const docRef = addDoc(collection(db, 'infos'), {
+                name: this.name,
+                area: this.area
+            })
+            console.log('Document written with ID: ', docRef.id)
+
+            this.isLoading = false
+            alert("お店を登録しました。")
+            this.$router.push("/mypage")
+
+        },
+        uploadFile(){
+            const file = this.$refs.preview;
+            const fileImg = file.files[0];
+            this.url = fileImg
+            console.log(this.url)
         }
     }
 }
