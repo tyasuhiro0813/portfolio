@@ -45,7 +45,6 @@
                 </b-field>
                 <div v-if="url" class="is-flex">
                     <img :src="url">
-                    <img :src="url">
                 </div>
             </section>
         </section>
@@ -63,8 +62,9 @@
 </template>
 
 <script>
-import { collection, addDoc } from "firebase/firestore"
-import {db} from "../plugins/firebase"
+import { collection, doc, setDoc, addDoc } from "firebase/firestore"
+import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage"
+import { db, storage } from "../plugins/firebase"
 
 export default {
     data(){
@@ -78,12 +78,13 @@ export default {
             member: "",
             recommend: "",
             share: false,
+            fileImg: null,
             url: "",
             isLoading: false
         }
     },
     methods: {
-        register(){
+        async register(){
             if(this.name === "") {
                 alert("未入力項目があります。")
                 return
@@ -119,10 +120,27 @@ export default {
             // console.log(this.name, this.rate, this.date, this.time, this.share)
             this.isLoading = true
             console.log(this.isLoading)
+            
             // firestoreへデータ追加
-            const docRef = addDoc(collection(db, 'infos'), {
+            const docRef = doc(collection(db, 'infos'))
+
+            let imageUrl = ""
+
+            if(this.fileImg){
+                // storageに画像をあげる
+                const imageRef = storageRef(storage, `images/${docRef.id}`)
+                await uploadBytes(imageRef, this.fileImg)
+
+                imageUrl = await getDownloadURL(imageRef)
+            }
+
+
+            await setDoc(docRef, {
+                id: docRef.id,
+                userId: this.$store.state.uuid,
                 name: this.name,
-                area: this.area
+                area: this.area,
+                imageUrl: imageUrl
             })
             console.log('Document written with ID: ', docRef.id)
 
@@ -132,11 +150,22 @@ export default {
 
         },
         uploadFile(){
-            const file = this.$refs.preview;
-            const fileImg = file.files[0];
-            this.url = fileImg
-            console.log(this.url)
+            const file = this.$refs.preview
+            const fileImg = file.files[0]
+        if(!fileImg) {
+            return
         }
+        this.fileImg = fileImg
+
+            const reader = new FileReader()
+
+            reader.onload = (e) => {
+                this.url = e.target.result
+            }
+
+            reader.readAsDataURL(fileImg)
+        },
+        // deleteImg()
     }
 }
 </script>

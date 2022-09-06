@@ -25,10 +25,7 @@
 
 <script>
 import {auth} from "../plugins/firebase"
-import {signInWithEmailAndPassword} from "firebase/auth"
-
-// 新しいユーザー登録_20220904
-import {createUserWithEmailAndPassword } from "firebase/auth"
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
 
 export default {
     layout: "login-layout",
