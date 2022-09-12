@@ -137,9 +137,15 @@ export default {
 
             await setDoc(docRef, {
                 id: docRef.id,
-                userId: this.$store.state.uuid,
+                userId: this.$store.state.uid,
                 name: this.name,
                 area: this.area,
+                genre: this.genre,
+                rate: this.rate,
+                date: this.date,
+                time: this.time,
+                member: this.member,
+                recommend: this.recommend,
                 imageUrl: imageUrl
             })
             console.log('Document written with ID: ', docRef.id)
@@ -152,10 +158,10 @@ export default {
         uploadFile(){
             const file = this.$refs.preview
             const fileImg = file.files[0]
-        if(!fileImg) {
-            return
-        }
-        this.fileImg = fileImg
+            if(!fileImg) {
+                return
+            }
+            this.fileImg = fileImg
 
             const reader = new FileReader()
 
