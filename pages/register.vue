@@ -51,7 +51,7 @@
         
         <section class="is-flex">
             <p class="control column is-half is-flex is-justify-content-right">
-                <b-button label="お店を登録" type="is-primary " size="is-medium" @click="register"/>
+                <b-button label="お店を登録" type="is-primary " size="is-medium" @click="register"></b-button>
             </p>
             <p class="control column is-half is-flex is-justify-content-left">
                 <b-switch v-model="share"> タイムラインでシェア </b-switch>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { collection, doc, setDoc, addDoc } from "firebase/firestore"
+import { collection, doc, setDoc } from "firebase/firestore"
 import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage"
 import { db, storage } from "../plugins/firebase"
 
@@ -73,8 +73,8 @@ export default {
             area: "",
             genre: "",
             rate: "",
-            date: "",
-            time: "",
+            date: new Date(),
+            time: new Date(),
             member: "",
             recommend: "",
             share: false,
@@ -82,6 +82,13 @@ export default {
             url: "",
             isLoading: false
         }
+    },
+    mounted() {
+        const sessionStorageID = sessionStorage.getItem('ID')
+        const localStorageID = localStorage.getItem('ID')
+        console.log("userID" ,this.$store.state.uid)
+        console.log("sessionStorageID", sessionStorageID)
+        console.log("localStorageID", localStorageID)
     },
     methods: {
         async register(){
@@ -146,6 +153,7 @@ export default {
                 time: this.time,
                 member: this.member,
                 recommend: this.recommend,
+                share: this.share,
                 imageUrl: imageUrl
             })
             console.log('Document written with ID: ', docRef.id)

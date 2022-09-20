@@ -26,17 +26,17 @@
       </div>
 
     <div class="navbar-end is-flex ml-auto">
-          <b-navbar-item class="navbar-right" href="/mypage">
+          <b-navbar-item class="navbar-right" tag="router-link" :to="{path:'/mypage'}">
             Myページ
           </b-navbar-item>
-          <b-navbar-item href="/register">
+          <b-navbar-item tag="router-link" :to="{path:'/register'}">
             お店を登録
           </b-navbar-item>
-          <b-navbar-item href="/timeline">
+          <b-navbar-item tag="router-link" :to="{path:'/timeline'}">
             タイムライン
           </b-navbar-item>
-          <b-navbar-item class="is-flex is-align-items-center">
-            ユーザーID：12345
+          <b-navbar-item tag="router-link" :to="{path:'/login'}">
+            ログアウト
           </b-navbar-item>
     </div>
 

@@ -1,124 +1,43 @@
 <template>
     <section class="is-flex">
         <section class="control column is-half is-justify-content-center">
-            <section v-for="info in infos" :key="info">
-                    店名： {{ info.name }}<br>
-                    エリア： {{ info.area }}<br>
-                    ジャンル： {{ info.genre }}<br>
-            </section>
-            <!-- <section v-for="area in areas" :key="area">
-                エリア： {{ area }}
-            </section>
-            <section v-for="genre in genres" :key="genre">
-                ジャンル： {{ genre }}
-            </section> -->
-            <!-- <section>
-                店名： {{ name[1] }}
-            </section>
             <section>
-                エリア： {{ area[1] }}
+                    <b-field label="店名" horizontal>{{ item.name }}</b-field>
+                    <b-field label="エリア" horizontal>{{ item.area }}</b-field>
+                    <b-field label="ジャンル" horizontal>{{ item.genre }}</b-field>
+                    <b-field label="評価" horizontal><b-rate v-model="item.rate" :disabled="isDisabled"></b-rate></b-field>
+                    <b-field label="来店日" horizontal>
+                        {{ item.date.toDate().getFullYear() }}年{{ item.date.toDate().getMonth() }}月{{ item.date.toDate().getDate() }}日
+                    </b-field>
+                    <b-field label="来店時間" horizontal>
+                        {{ item.time.toDate().getHours().toString().padStart(2, "0") }}時{{ item.time.toDate().getMinutes().toString().padStart(2, "0") }}分
+                    </b-field>
+                    <b-field label="来店人数" horizontal>{{ item.member }}</b-field>
+                    <b-field label="おすすめ" horizontal>{{ item.recommend }}</b-field>
             </section>
-            <section>
-                ジャンル： {{ genre[1] }}
-            </section>
-            <section class="is-flex">
-                評価： <b-rate v-model="rate"></b-rate>
-            </section> -->
         </section>
-        <!-- <section class="is-flex">
+        <section class="is-flex">
             <figure class="image is-128x128">
-                <img v-bind:src="url">
+                <img v-bind:src="item.imageUrl">
             </figure>
-            <figure class="image is-128x128">
-                <img
-                src="~/assets/ramen.JPG"
-                >
-            </figure>
-            <figure class="image is-128x128">
-                <img
-                src="~/assets/ramen.JPG"
-                >
-            </figure>
-        </section> -->
-        <!-- <section class="control column is-half is-justify-content-center">
-            <section>
-                行った日： {{ date }}
-            </section>
-            <section>
-                行った時間帯： {{ time }}
-            </section>
-            <section>
-                人数： {{ number }}
-            </section>
-            <section>
-                おすすめ： {{ recommend }}
-            </section>
-        </section> -->
+        </section>
     </section>
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore"
-import { db } from "../plugins/firebase"
+
 
 export default {
-    data(){
-        // return {
-        //         name: "",
-        //         area: "",
-        //         genre: "",
-        //         rate: "",
-        //         date: "",
-        //         time: "",
-        //         number: "",
-        //         recommend: "",
-        //         url: "",
-                
-        // }
+    data() {
         return {
-                infos:[
-                        {
-                            name: "",
-                            area: "",
-                            genre: ""
-                        },
-                        {
-                            name: "",
-                            area: "",
-                            genre: ""
-                        }
-                ]
+            isDisabled: true
         }
     },
-    async created () {
-        const docRef = collection(db, 'infos')
-        const docSnap = await getDocs(docRef)
-
-        // docSnap.forEach((doc) => {
-        //     this.name = doc.data().name
-        //     this.area = doc.data().area
-        //     this.genre = doc.data().genre
-        //     this.rate = doc.data().rate
-        //     this.url = doc.data().imageUrl
-        
-        //     console.log(doc.id, "=>", doc.data())
-        //     console.log(this.name)
-        //     console.log(doc)
-        // })
-        console.log(docSnap.docs.length)
-        console.log(docSnap.docs[1].data().name)
-
-        length = docSnap.docs.length
-        for(let i=0; i < length; i++){
-            this.infos[i].name = docSnap.docs[i].data().name
-            this.infos[i].area = docSnap.docs[i].data().area
-            this.infos[i].genre = docSnap.docs[i].data().genre
+    props: {
+        item:{
+            type:Object, 
+            default: () => { }
         }
-        console.log(`店名：${this.infos[0].name}`)
-        console.log(`エリア：${this.infos[0].area}`)
-        console.log(`店名：${this.infos[1].name}`)
-        console.log(`エリア：${this.infos[1].area}`)
-        
     }
 }
 </script>

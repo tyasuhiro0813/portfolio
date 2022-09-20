@@ -56,9 +56,11 @@ export default {
                 console.log(user)
                 // storeにuseridを入れる
                 this.$store.commit("setUid", user.user.uid)
+                sessionStorage.setItem('ID', user.user.uid)
+                localStorage.removeItem('ID')
                 this.isLoading = false
                 alert("ログインしました。")
-                this.$router.push("/mypage")
+                this.$router.push("/register")
             })
             .catch((error)=> {
                 console.log(error)
@@ -83,7 +85,7 @@ export default {
                 this.$store.commit("setUid", user.user.uid)
                 this.isLoading = false
                 alert("新規登録しました。")
-                this.$router.push("/mypage")
+                this.$router.push("/register")
             })
             .catch((error) => {
                 const errorCode = error.code;

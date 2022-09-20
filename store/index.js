@@ -1,3 +1,5 @@
+import { auth } from '~/plugins/firebase.js'
+
 export const state = () => ({
     uid: ""
 })

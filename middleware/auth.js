@@ -7,11 +7,13 @@ export default function({ store, route, redirect }){
     }
     else {
         const userId = store.state.uid
+        const storageID = sessionStorage.getItem('ID')
 
-        if(userId === ""){
+        if(userId === "" && storageID === null){
             alert("ログインしてください。")
             return redirect("/login")
         }
     }
 }
+
 
