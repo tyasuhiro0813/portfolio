@@ -156,7 +156,7 @@ export default {
                 share: this.share,
                 imageUrl: imageUrl
             })
-            console.log('Document written with ID: ', docRef.id)
+            // console.log('Document written with ID: ', docRef.id)
 
             this.isLoading = false
             alert("お店を登録しました。")
