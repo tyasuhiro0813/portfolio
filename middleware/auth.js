@@ -9,6 +9,10 @@ export default function({ store, route, redirect }){
         const userId = store.state.uid
         const storageID = sessionStorage.getItem('ID')
 
+        if(userId === "" && storageID){
+            store.commit("setUid", storageID)
+        }
+
         if(userId === "" && storageID === null){
             alert("ログインしてください。")
             return redirect("/login")
