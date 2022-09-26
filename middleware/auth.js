@@ -7,7 +7,7 @@ export default function({ store, route, redirect }){
     }
     else {
         const userId = store.state.uid
-        const storageID = sessionStorage.getItem('ID')
+        const storageID = sessionStorage.getItem('portfolioID')
 
         if(userId === "" && storageID){
             store.commit("setUid", storageID)
