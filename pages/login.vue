@@ -56,7 +56,8 @@ export default {
                 console.log(user)
                 // storeにuseridを入れる
                 this.$store.commit("setUid", user.user.uid)
-                sessionStorage.setItem('ID', user.user.uid)
+                sessionStorage.removeItem('ID')
+                sessionStorage.setItem('portfolioID', user.user.uid)
                 localStorage.removeItem('ID')
                 this.isLoading = false
                 alert("ログインしました。")
