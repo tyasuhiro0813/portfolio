@@ -4,8 +4,8 @@
             <section>
                 <b-field label="エリアでソート">
                     <b-select placeholder="Select a area" v-model="selectedArea">
-                        <option v-for="info in infos" :key="info.id" :value="info.area">
-                            {{ info.area }}
+                        <option v-for="area in areas" :key="area.id" :value="area">
+                            {{ area }}
                         </option>
                     </b-select>
                 </b-field>
@@ -14,8 +14,8 @@
             <section>
                 <b-field label="ジャンルでソート">
                     <b-select placeholder="Select a genre" v-model="selectedGenre">
-                        <option v-for="info in infos" :key="info.id" :value="info.genre">
-                            {{ info.genre }}
+                        <option v-for="genre in genres" :key="genre.id" :value="genre">
+                            {{ genre }}
                         </option>
                     </b-select>
                 </b-field>
@@ -44,6 +44,8 @@ export default {
     data(){
         return {
                 infos:{},
+                areas:[],
+                genres:[],
                 selectedArea: "",
                 selectedGenre: "",
         }
@@ -62,6 +64,21 @@ export default {
         this.infos = docSnap.docs.map(d => {
             return d.data() 
             })
+        
+        // ソートの選択肢（area）を作成 
+        for(let i = 0; i < this.infos.length; i++) {
+            this.areas.push(this.infos[i].area)
+            this.areas = Array.from(new Set(this.areas))
+        }
+        console.log(this.areas)
+
+         // ソートの選択肢（genre）を作成 
+        for(let i = 0; i < this.infos.length; i++) {
+            this.genres.push(this.infos[i].genre)
+            this.genres = Array.from(new Set(this.genres))
+        }
+        console.log(this.genres)
+        
     },
     methods: {
         async areaSelect(){
