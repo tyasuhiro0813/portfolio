@@ -5,11 +5,9 @@
                 v-model="email">
             </b-input>
         </b-field>
-
         <b-field label="Password">
             <b-input v-model="password" type="password" ></b-input>
         </b-field>
-
         <div class="is-flex">
             <p class="control column is-half is-flex is-justify-content-center">
                 <b-button label="新規登録" type="is-primary " size="is-medium" @click="register"/>
@@ -18,7 +16,6 @@
                 <b-button label="Login" type="is-primary" size="is-medium" @click="login"/>
             </p>
         </div>
-
         <b-loading is-full-page v-show="isLoading"></b-loading>
     </section>
 </template>

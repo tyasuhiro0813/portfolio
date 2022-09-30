@@ -84,11 +84,9 @@ export default {
         }
     },
     mounted() {
-        const sessionStorageID = sessionStorage.getItem('ID')
-        const localStorageID = localStorage.getItem('ID')
+        const sessionStorageID = sessionStorage.getItem('portfolioID')
         console.log("userID" ,this.$store.state.uid)
-        console.log("sessionStorageID", sessionStorageID)
-        console.log("localStorageID", localStorageID)
+        console.log("portfolioID", sessionStorageID)
     },
     methods: {
         async register(){
