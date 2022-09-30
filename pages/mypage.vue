@@ -66,17 +66,29 @@ export default {
             })
         
         // ソートの選択肢（area）を作成 
-        for(let i = 0; i < this.infos.length; i++) {
-            this.areas.push(this.infos[i].area)
-            this.areas = Array.from(new Set(this.areas))
-        }
+        // for(let i = 0; i < this.infos.length; i++) {
+        //     this.areas.push(this.infos[i].area)
+        //     this.areas = Array.from(new Set(this.areas))
+        // }
+
+
+        const areas = this.infos.map(info => {
+            return info.area
+        })
+        this.areas = Array.from(new Set(areas))
         console.log(this.areas)
 
          // ソートの選択肢（genre）を作成 
-        for(let i = 0; i < this.infos.length; i++) {
-            this.genres.push(this.infos[i].genre)
-            this.genres = Array.from(new Set(this.genres))
-        }
+        // for(let i = 0; i < this.infos.length; i++) {
+        //     this.genres.push(this.infos[i].genre)
+        //     this.genres = Array.from(new Set(this.genres))
+        // }
+        
+
+        const genres = this.infos.map(info => {
+            return info.genre
+        })
+        this.genres = Array.from(new Set(genres))
         console.log(this.genres)
         
     },
