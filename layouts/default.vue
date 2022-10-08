@@ -17,6 +17,8 @@
           >
         </a>
 
+        <p>ユーザーネーム：{{ userName }}</p>
+
         <!-- <div class="navbar-burger">
           <p>aaa</p>
           <span />
@@ -79,6 +81,7 @@ export default {
   name: 'DefaultLayout',
   data () {
     return {
+      userName: this.$store.state.uname,
       items: [
         {
           title: 'Home',

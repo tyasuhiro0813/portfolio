@@ -85,7 +85,9 @@ export default {
     },
     mounted() {
         const sessionStorageID = sessionStorage.getItem('portfolioID')
+        const sessionStorageUser = sessionStorage.getItem('portfolioUser')
         console.log("userID" ,this.$store.state.uid)
+        console.log("userName", sessionStorageUser)
         console.log("portfolioID", sessionStorageID)
     },
     methods: {
@@ -176,8 +178,7 @@ export default {
             }
 
             reader.readAsDataURL(fileImg)
-        },
-        // deleteImg()
+        }
     }
 }
 </script>

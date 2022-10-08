@@ -1,5 +1,9 @@
 <template>
     <section class="section container column is-half">
+        <b-field label="Username">
+            <b-input v-model="userName">
+            </b-input>
+        </b-field>
         <b-field label="Email">
             <b-input type="email"
                 v-model="email">
@@ -22,12 +26,13 @@
 
 <script>
 import {auth} from "../plugins/firebase"
-import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile} from "firebase/auth"
 
 export default {
     layout: "login-layout",
     data(){
         return {
+            userName: "",
             email: "",
             password: "",
             // Loading UIの表示
@@ -47,15 +52,15 @@ export default {
                 return
             }
             this.isLoading = true
-            console.log(this.email, this.password)
             signInWithEmailAndPassword(auth, this.email, this.password) 
             .then((user)=> {
                 console.log(user)
                 // storeにuseridを入れる
                 this.$store.commit("setUid", user.user.uid)
-                sessionStorage.removeItem('ID')
                 sessionStorage.setItem('portfolioID', user.user.uid)
-                localStorage.removeItem('ID')
+                // storeにusernameを入れる
+                this.$store.commit("setUname", auth.currentUser.displayName)
+                sessionStorage.setItem('portfolioUser', auth.currentUser.displayName)
                 this.isLoading = false
                 alert("ログインしました。")
                 this.$router.push("/register")
@@ -67,6 +72,10 @@ export default {
             })
         },
         register(){
+            if(this.userName === "") {
+                alert("ニックネームを入力してください。")
+                return
+            }
             if(this.email === "") {
                 alert("メールアドレスを入力してください。")
                 return
@@ -76,11 +85,17 @@ export default {
                 return
             }
             this.isLoading = true
-            console.log(this.email, this.password)
+            console.log(this.userName, this.email, this.password)
             createUserWithEmailAndPassword(auth, this.email, this.password)
-            .then((user) => {
+            .then(async(user) => {
+                await updateProfile(auth.currentUser, {
+                    displayName: this.userName
+                })
                 // Signed in
                 this.$store.commit("setUid", user.user.uid)
+                sessionStorage.setItem('portfolioID', user.user.uid)
+                this.$store.commit("setUname", auth.currentUser.displayName)
+                sessionStorage.setItem('portfolioUser', auth.currentUser.displayName)
                 this.isLoading = false
                 alert("新規登録しました。")
                 this.$router.push("/register")
@@ -97,7 +112,8 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$store.state.uid)
+        console.log("uid", this.$store.state.uid)
+        console.log("uname", this.$store.state.uname)
     },    
 }
 </script>
