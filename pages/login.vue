@@ -20,6 +20,14 @@
                 <b-button label="Login" type="is-primary" size="is-medium" @click="login"/>
             </p>
         </div>
+        <div class="is-flex">
+            <p class="control column is-half is-flex is-justify-content-center">
+                <b-button label="Googleアカウントで新規登録" type="is-primary " size="is-medium" @click="googleRegister"/>
+            </p>
+            <p class="control column is-half is-flex is-justify-content-center">
+                <b-button label="GoogleアカウントでLogin" type="is-primary" size="is-medium" @click="googleLogin"/>
+            </p>
+        </div>
         <b-loading is-full-page v-show="isLoading"></b-loading>
     </section>
 </template>
@@ -108,6 +116,12 @@ export default {
                 this.isLoading = false
                 alert("新規登録に失敗しました。")
             });
+
+        },
+        googleRegister(){
+
+        },
+        googleLogin(){
 
         }
     },
