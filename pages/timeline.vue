@@ -77,6 +77,20 @@ export default {
         this.genres = Array.from(new Set(genres))
         console.log(this.genres)
     },
+    computed: {
+        whereQueris(){
+            const whereQueryArray = []
+
+            if(this.selectedGenre){
+                whereQueryArray.push(where("genre", "==", this.selectedGenre))
+            }
+            if(this.selectedArea){
+                whereQueryArray.push(where("area", "==", this.selectedArea))
+            }
+
+            return whereQueryArray
+        }
+    },
     methods: {
         async areaSelect(){
             if(this.selectedArea == "") {
@@ -134,86 +148,114 @@ export default {
             }
         },
         async rateSelect(){
-            if(this.selectedArea !== "" && this.selectedGenre !== "") {
-                const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), where("genre", "==", this.selectedGenre), orderBy("rate", "desc"))
-                const docSnap = await getDocs(docQuery)
+            const docRef = collection(db, 'infos')
+            const docQuery = query(
+                docRef,
+                where("userId", "==", this.$store.state.uid),
+                where("share", "==", true),
+                ...this.whereQueris,
+                orderBy("rate", "desc"))
+            const docSnap = await getDocs(docQuery)
 
-                this.infos = docSnap.docs.map(d => {
-                return d.data() 
-                })
-                console.log(`${this.selectedArea}, ${this.selectedGenre}で評価が高い順に表示`)
-            } else if(this.selectedArea !== "" && this.selectedGenre == "") {
-                const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), orderBy("rate", "desc"))
-                const docSnap = await getDocs(docQuery)
-
-                this.infos = docSnap.docs.map(d => {
-                return d.data() 
-                })
-                console.log(`${this.selectedArea}で評価が高い順に表示`)
-            } else if(this.selectedArea == "" && this.selectedGenre !== "") {
-                const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("genre", "==", this.selectedGenre), orderBy("rate", "desc"))
-                const docSnap = await getDocs(docQuery)
-
-                this.infos = docSnap.docs.map(d => {
-                return d.data() 
-                })
-                console.log(`${this.selectedGenre}で評価が高い順に表示`)
-            } else {
-                const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), orderBy("rate", "desc"))
-                const docSnap = await getDocs(docQuery)
-
-                this.infos = docSnap.docs.map(d => {
-                return d.data() 
-                })
-                console.log("評価が高い順に表示")
-            }
+            this.infos = docSnap.docs.map(d => {
+            return d.data() 
+            })
         },
+        // async rateSelect(){
+        //     if(this.selectedArea !== "" && this.selectedGenre !== "") {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), where("genre", "==", this.selectedGenre), orderBy("rate", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log(`${this.selectedArea}, ${this.selectedGenre}で評価が高い順に表示`)
+        //     } else if(this.selectedArea !== "" && this.selectedGenre == "") {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), orderBy("rate", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log(`${this.selectedArea}で評価が高い順に表示`)
+        //     } else if(this.selectedArea == "" && this.selectedGenre !== "") {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("genre", "==", this.selectedGenre), orderBy("rate", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log(`${this.selectedGenre}で評価が高い順に表示`)
+        //     } else {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), orderBy("rate", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log("評価が高い順に表示")
+        //     }
+        // },
         async newestDate(){
-            if(this.selectedArea !== "" && this.selectedGenre !== "") {
                 const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), where("genre", "==", this.selectedGenre), orderBy("date", "desc"))
+                const docQuery = query(
+                    docRef,
+                    where("userId", "==", this.$store.state.uid),
+                    where("share", "==", true),
+                    ...this.whereQueris,
+                    orderBy("date", "desc"))
                 const docSnap = await getDocs(docQuery)
 
                 this.infos = docSnap.docs.map(d => {
                 return d.data() 
                 })
-                console.log(`${this.selectedArea}, ${this.selectedGenre}で新しい順に表示`)
-            } else if(this.selectedArea !== "" && this.selectedGenre == "") {
-                const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), orderBy("date", "desc"))
-                const docSnap = await getDocs(docQuery)
-
-                this.infos = docSnap.docs.map(d => {
-                return d.data() 
-                })
-                console.log(`${this.selectedArea}で新しい順に表示`)
-            } else if(this.selectedArea == "" && this.selectedGenre !== "") {
-                const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("genre", "==", this.selectedGenre), orderBy("date", "desc"))
-                const docSnap = await getDocs(docQuery)
-
-                this.infos = docSnap.docs.map(d => {
-                return d.data() 
-                })
-                console.log(`${this.selectedGenre}で新しい順に表示`)
-            } else {
-                const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), orderBy("date", "desc"))
-                const docSnap = await getDocs(docQuery)
-
-                this.infos = docSnap.docs.map(d => {
-                return d.data() 
-                })
-                console.log(`${this.selectedGenre}で新しい順に表示`)   
-            }
         },
+        // async newestDate(){
+        //     if(this.selectedArea !== "" && this.selectedGenre !== "") {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), where("genre", "==", this.selectedGenre), orderBy("date", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log(`${this.selectedArea}, ${this.selectedGenre}で新しい順に表示`)
+        //     } else if(this.selectedArea !== "" && this.selectedGenre == "") {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), orderBy("date", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log(`${this.selectedArea}で新しい順に表示`)
+        //     } else if(this.selectedArea == "" && this.selectedGenre !== "") {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("genre", "==", this.selectedGenre), orderBy("date", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log(`${this.selectedGenre}で新しい順に表示`)
+        //     } else {
+        //         const docRef = collection(db, 'infos')
+        //         const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), orderBy("date", "desc"))
+        //         const docSnap = await getDocs(docQuery)
+
+        //         this.infos = docSnap.docs.map(d => {
+        //         return d.data() 
+        //         })
+        //         console.log(`${this.selectedGenre}で新しい順に表示`)   
+        //     }
+        // },
         async reCreated(){
             this.selectedArea = ""
-            this.selectedGenre =""
+            this.selectedGenre = ""
             const docRef = collection(db, 'infos')
             const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true))
             const docSnap = await getDocs(docQuery)

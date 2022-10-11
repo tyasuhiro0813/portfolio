@@ -72,7 +72,7 @@ export default {
             name: "",
             area: "",
             genre: "",
-            rate: "",
+            rate: 0,
             date: new Date(),
             time: new Date(),
             member: "",

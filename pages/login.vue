@@ -22,9 +22,6 @@
         </div>
         <div class="is-flex">
             <p class="control column is-half is-flex is-justify-content-center">
-                <b-button label="Googleアカウントで新規登録" type="is-primary " size="is-medium" @click="googleRegister"/>
-            </p>
-            <p class="control column is-half is-flex is-justify-content-center">
                 <b-button label="GoogleアカウントでLogin" type="is-primary" size="is-medium" @click="googleLogin"/>
             </p>
         </div>
@@ -34,7 +31,7 @@
 
 <script>
 import {auth} from "../plugins/firebase"
-import {signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile} from "firebase/auth"
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup} from "firebase/auth"
 
 export default {
     layout: "login-layout",
@@ -118,11 +115,28 @@ export default {
             });
 
         },
-        googleRegister(){
-
-        },
-        googleLogin(){
-
+        async googleLogin(){
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+            .then(async result => {
+                console.log({ result })
+                const user = result.user
+                await updateProfile(auth.currentUser, {
+                    displayName: user.displayName
+                })
+                this.$store.commit("setUid", user.uid)
+                sessionStorage.setItem('portfolioID', user.uid)
+                this.$store.commit("setUname", user.displayName)
+                sessionStorage.setItem('portfolioUser', user.displayName)
+                this.isLoading = false
+                alert("ログインしました。")
+                this.$router.push("/register")
+            })
+            .catch((error)=> {
+                console.log(error)
+                this.isLoading = false
+                alert("ログインに失敗しました。")
+            })
         }
     },
     mounted() {
