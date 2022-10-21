@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar header has-shadow is-primary"
+      class="navbar header has-shadow nav-color"
       role="navigation"
       aria-label="main navigation"
     >
@@ -10,18 +10,8 @@
           class="navbar-item"
           href="/"
         >
-          <img
-            src="~assets/buefy.png"
-            alt="Buefy"
-            height="28"
-          >
+          <h1 class="title is-1">グルメモ</h1>
         </a>
-
-        <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
-        </div>
       </div>
     </nav>
 
@@ -32,5 +22,18 @@
     </section>
   </div>
 </template>
+
+<style>
+  .nav-color {
+    background-color: #267853;
+  }
+  .navbar-brand {
+    margin: 0 auto;
+  }
+  .title {
+      color: white;
+      font-family: 'ヒラギノ角ゴ StdN','Hiragino Kaku Gothic StdN',sans-serif;
+  }
+</style>
 
 

@@ -1,43 +1,35 @@
 <template>
   <div>
     <nav
-      class="navbar header is-primary"
+      class="navbar header nav-color"
       role="navigation"
       aria-label="main navigation"
     >
-      <div class="navbar-brand">
+      <div class="is-flex">
         <a
           class="navbar-item"
           href="/"
         >
-          <img
-            src="~assets/buefy.png"
-            alt="Buefy"
-            height="28"
-          >
+          <h1 class="title is-1">グルメモ</h1>
         </a>
 
-        <p>ユーザーネーム：{{ userName }}</p>
-
-        <!-- <div class="navbar-burger">
-          <p>aaa</p>
-          <span />
-          <span />
-          <span />
-        </div> -->
+        <p class="title is-4 user-name">Username：{{ userName }}</p>
       </div>
 
-    <div class="navbar-end is-flex ml-auto">
-          <b-navbar-item class="navbar-right" tag="router-link" :to="{path:'/mypage'}">
+    <div class="navbar-end is-flex ml-auto nav-items">
+          <b-navbar-item type="is-white" class="nav-item" tag="router-link" :to="{path:'/mypage'}">
             Myページ
           </b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{path:'/register'}">
+          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/register'}">
             お店を登録
           </b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{path:'/timeline'}">
+          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/timeline'}">
             タイムライン
           </b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{path:'/login'}">
+          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/contact'}">
+            お問合わせ
+          </b-navbar-item>
+          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/login'}">
             ログアウト
           </b-navbar-item>
     </div>
@@ -48,31 +40,6 @@
     <div class="container column is-10">
         <Nuxt />
     </div>
-
-    <!-- <section class="main-content columns">
-      <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li
-            v-for="(item, key) of items"
-            :key="key"
-          >
-            <NuxtLink
-              :to="item.to"
-              exact-active-class="is-active"
-            >
-              <b-icon :icon="item.icon" /> {{ item.title }}
-            </NuxtLink>
-          </li>
-        </ul>
-      </aside>
-
-      <div class="container column is-10">
-        <Nuxt />
-      </div>
-    </section> -->
   </div>
 </template>
 
@@ -82,19 +49,31 @@ export default {
   data () {
     return {
       userName: this.$store.state.uname,
-      items: [
-        {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' }
-        },
-        {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' }
-        }
-      ]
+      // items: [
+      //   {
+      //     title: 'Home',
+      //     icon: 'home',
+      //     to: { name: 'index' }
+      //   },
+        // {
+        //   title: 'Inspire',
+        //   icon: 'lightbulb',
+        //   to: { name: 'inspire' }
+        // }
+      // ]
     }
   }
 }
 </script>
+
+<style>
+  .user-name {
+    margin-left: 20px;
+    padding-top: 25px;
+  }
+
+  .nav-item {
+    font-weight: bold;
+    color: white;
+  }
+</style>

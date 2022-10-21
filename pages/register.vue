@@ -5,56 +5,65 @@
             <section>
                 <b-loading is-full-page v-show="isLoading"></b-loading>
             </section>
-            <section class="section container column is-half">
-                <b-field label="店名" horizontal>
+            <section class="section container column is-half shop-infos">
+                <b-field class="shop-info" label="店名" horizontal>
                     <b-input v-model="name"></b-input>
                 </b-field>
 
-                <b-field label="エリア" horizontal>
-                    <b-input v-model="area" maxlength="30"></b-input>
+                <b-field class="shop-info" label="エリア" horizontal>
+                    <b-input v-model="area"></b-input>
                 </b-field>
 
-                <b-field label="ジャンル" horizontal>
-                    <b-input v-model="genre" maxlength="30"></b-input>
+                <b-field class="shop-info" label="ジャンル" horizontal>
+                    <b-input v-model="genre"></b-input>
                 </b-field>
 
-                <b-field label="評価" horizontal>
-                    <b-rate v-model="rate"></b-rate>
+                <b-field class="shop-info" label="おすすめ" horizontal>
+                    <b-input v-model="recommend"></b-input>
                 </b-field>
 
-                <b-field label="投稿画像" horizontal>
+                <b-field class="shop-info" label="投稿画像" horizontal>
                     <input type="file" ref="preview" @change="uploadFile">
                 </b-field>
             </section>
 
-            <section class="section container column is-half">
-                <b-field label="来店日" horizontal>
+            <section class="section container column is-half shop-infos">
+                <b-field class="shop-info" label="来店日" horizontal>
                     <b-datepicker v-model="date"></b-datepicker>
                 </b-field>
 
-                <b-field label="来店時間" horizontal>
+                <b-field class="shop-info" label="来店時間" horizontal>
                     <b-timepicker v-model="time"></b-timepicker>
                 </b-field>
 
-                <b-field label="来店人数" horizontal>
-                    <b-input v-model="member" maxlength="30"></b-input>
+                <b-field class="shop-info" label="来店人数" horizontal>
+                    <b-input v-model="member"></b-input>
                 </b-field>
 
-                <b-field label="おすすめ" horizontal>
-                    <b-input v-model="recommend"></b-input>
+                <b-field class="shop-info rates" label="評価" horizontal>
+                    <b-rate v-model="rate"></b-rate>
                 </b-field>
-                <div v-if="url" class="is-flex">
-                    <img :src="url">
+                
+                <div class="is-flex">
+                    <div v-if="url" class="is-flex food-photo">
+                        <img :src="url">
+                    </div>
+                    <div v-if="url" class="is-flex food-photo">
+                        <img :src="url">
+                    </div>
+                    <div v-if="url" class="is-flex food-photo">
+                        <img :src="url">
+                    </div>
                 </div>
             </section>
         </section>
         
         <section class="is-flex">
             <p class="control column is-half is-flex is-justify-content-right">
-                <b-button label="お店を登録" type="is-primary " size="is-medium" @click="register"></b-button>
+                <b-button label="お店を登録" type="is-success is-light" size="is-medium" @click="register"></b-button>
             </p>
             <p class="control column is-half is-flex is-justify-content-left">
-                <b-switch v-model="share"> タイムラインでシェア </b-switch>
+                <b-switch type="is-dark" v-model="share"> タイムラインでシェア </b-switch>
             </p>
         </section>
         
@@ -182,3 +191,23 @@ export default {
     }
 }
 </script>
+
+<style>
+    .shop-infos {
+        padding-bottom: 0;
+        padding-top: 0;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    .shop-info {
+        margin: 10px 0;
+        padding: 10px 0;
+    }
+    .food-photo {
+        max-width: 150px;
+        margin: 15px auto;
+    }
+    .rates {
+        margin-top: 20px;
+    }
+</style>
