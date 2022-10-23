@@ -44,14 +44,14 @@
                     <b-rate v-model="rate"></b-rate>
                 </b-field>
                 
-                <div class="is-flex">
-                    <div v-if="url" class="is-flex food-photo">
+                <div class="is-flex food-photos">
+                    <div v-if="url" class="is-flex image is-128x128 food-photo">
                         <img :src="url">
                     </div>
-                    <div v-if="url" class="is-flex food-photo">
+                    <div v-if="url" class="is-flex image is-128x128 food-photo">
                         <img :src="url">
                     </div>
-                    <div v-if="url" class="is-flex food-photo">
+                    <div v-if="url" class="is-flex image is-128x128 food-photo">
                         <img :src="url">
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                 <b-button label="お店を登録" type="is-success is-light" size="is-medium" @click="register"></b-button>
             </p>
             <p class="control column is-half is-flex is-justify-content-left">
-                <b-switch type="is-dark" v-model="share"> タイムラインでシェア </b-switch>
+                <b-switch type="is-dark" v-model="share"> タイムラインで他のユーザーにシェア </b-switch>
             </p>
         </section>
         
@@ -89,7 +89,8 @@ export default {
             share: false,
             fileImg: null,
             url: "",
-            isLoading: false
+            isLoading: false,
+            userName: this.$store.state.uname,
         }
     },
     mounted() {
@@ -163,7 +164,8 @@ export default {
                 member: this.member,
                 recommend: this.recommend,
                 share: this.share,
-                imageUrl: imageUrl
+                imageUrl: imageUrl,
+                userName: this.$store.state.uname,
             })
             console.log('Document written with ID: ', docRef.id)
 
@@ -203,9 +205,12 @@ export default {
         margin: 10px 0;
         padding: 10px 0;
     }
+    .food-photos {
+        align-items: center;
+    }
     .food-photo {
-        max-width: 150px;
-        margin: 15px auto;
+        min-width: 150px;
+        margin: 0 auto;
     }
     .rates {
         margin-top: 20px;

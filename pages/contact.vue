@@ -3,7 +3,7 @@
         <h1>お問い合わせ</h1>
         <p>以下のフォームにお問い合わせ事項を記入し、「送信」ボタンを押してください</p>
         <p>お問い合わせを受領しましたら、内容を確認させていただき、5営業日以内にメールにてご返信させていただきます。</p>
-        <section>
+        <!-- <section>
             <b-field label="お名前" horizontal>
                     <b-input v-model="name"></b-input>
             </b-field>
@@ -18,7 +18,7 @@
             <p class="control column is-half is-flex is-justify-content-right">
                 <b-button label="送信" type="is-primary " size="is-medium" @click="send"></b-button>
             </p>
-        </section>
+        </section> -->
     </section>
 </template>
 

@@ -5,36 +5,34 @@
       role="navigation"
       aria-label="main navigation"
     >
-      <div class="is-flex">
-        <a
-          class="navbar-item"
-          href="/"
-        >
-          <h1 class="title is-1">グルメモ</h1>
-        </a>
-
-        <p class="title is-4 user-name">Username：{{ userName }}</p>
+      <div class="is-flex main-title">
+        <div class="logo">
+          <div class="navbar-item">
+            <h1 class="title is-1">グルメモ</h1>
+          </div>
+        </div>
+        <div class="user-name">
+          <p class="title is-5">Username：{{ userName }}</p>
+        </div>
       </div>
 
-    <div class="navbar-end is-flex ml-auto nav-items">
-          <b-navbar-item type="is-white" class="nav-item" tag="router-link" :to="{path:'/mypage'}">
-            Myページ
-          </b-navbar-item>
-          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/register'}">
-            お店を登録
-          </b-navbar-item>
-          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/timeline'}">
-            タイムライン
-          </b-navbar-item>
-          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/contact'}">
-            お問合わせ
-          </b-navbar-item>
-          <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/login'}">
-            ログアウト
-          </b-navbar-item>
-    </div>
-
-      
+      <div class="navbar-end is-flex ml-auto nav-items">
+            <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/mypage'}">
+              Myページ
+            </b-navbar-item>
+            <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/register'}">
+              お店を登録
+            </b-navbar-item>
+            <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/timeline'}">
+              タイムライン
+            </b-navbar-item>
+            <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/contact'}">
+              お問合わせ
+            </b-navbar-item>
+            <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/login'}">
+              ログアウト
+            </b-navbar-item>
+      </div>
     </nav>
 
     <div class="container column is-10">
@@ -68,12 +66,18 @@ export default {
 
 <style>
   .user-name {
-    margin-left: 20px;
-    padding-top: 25px;
+    margin: auto 20px;
   }
 
   .nav-item {
     font-weight: bold;
     color: white;
+  }
+  .main-title .navbar-item {
+    padding: 0;
+    margin: auto 10px;
+  }
+  .logo {
+    padding: 0;
   }
 </style>

@@ -1,31 +1,41 @@
 <template>
     <section>
-        <section class="is-flex">
-            <section>
-                <b-field label="エリアでソート">
+        <section class="container is-flex sort-area">
+            <div class="sort-items">
+                <b-field class="sort-item" label="エリアでソート">
                     <b-select placeholder="Select a area" v-model="selectedArea">
                         <option v-for="area in areas" :key="area.id" :value="area">
                             {{ area }}
                         </option>
                     </b-select>
                 </b-field>
-                <b-button type="is-primary" @click="areaSelect">エリアでソート</b-button>
-            </section>
-            <section>
-                <b-field label="ジャンルでソート">
+                <b-button type="is-success is-light" @click="areaSelect">エリアでソート</b-button>
+            </div>
+            <div class="sort-items">
+                <b-field class="sort-item" label="ジャンルでソート">
                     <b-select placeholder="Select a genre" v-model="selectedGenre">
                         <option v-for="genre in genres" :key="genre.id" :value="genre">
                             {{ genre }}
                         </option>
                     </b-select>
                 </b-field>
-                <b-button type="is-primary" @click="genreSelect">ジャンルでソート</b-button>
-             </section>
-             <section>
-                <b-button type="is-primary" @click="rateSelect">評価が高い順に表示</b-button>
-             </section>
-             <b-button type="is-primary" @click="newestDate">最新順に表示</b-button>
-             <b-button type="is-primary" @click="reCreated">ソートを解除</b-button>
+                <b-button type="is-success is-light" @click="genreSelect">ジャンルでソート</b-button>
+            </div>
+            <div class="is-flex sort-items">
+                <b-field class="sort-item" label="評価が高い順に並べ替え">
+                    <b-button class="item" type="is-success is-light" @click="rateSelect">評価が高い順に表示</b-button>
+                </b-field>
+            </div>
+            <div class="is-flex sort-items">
+                <b-field class="sort-item" label="最新順に並べ替え">
+                    <b-button class="item" type="is-success is-light" @click="newestDate">最新順に表示</b-button>
+                </b-field>
+            </div>
+            <div class="is-flex sort-items">
+                <b-field class="sort-item" label="ソート・並べ替えを解除">
+                    <b-button class="item" type="is-success is-light" @click="reCreated">ソート・並べ替えを解除</b-button>
+                </b-field>
+            </div>
         </section>
         <section>
             <Mypost v-for="info in infos" :key="info.id" :item="info"></Mypost>
@@ -209,7 +219,7 @@ export default {
             const docQuery = query(
                 docRef,
                 where("userId", "==", this.$store.state.uid),
-                where("area", "==", this.selectedArea),
+                // where("area", "==", this.selectedArea),
                 ...this.whereQueris,
                 orderBy("date", "desc"))
             const docSnap = await getDocs(docQuery)
@@ -273,3 +283,21 @@ export default {
 
 }
 </script>
+
+<style>
+    .sort-area {
+        text-align: center;
+        margin: 20px auto;
+    }
+    .sort-items {
+        margin-bottom: 0;
+        align-items: flex-end;
+    }
+    .sort-item {
+        width: 235px;
+        margin-bottom: 0;
+    }
+    .item {
+        margin-top: 52px;
+    }
+</style>
