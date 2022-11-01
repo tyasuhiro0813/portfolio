@@ -22,8 +22,14 @@
                     <b-input v-model="recommend"></b-input>
                 </b-field>
 
-                <b-field class="shop-info" label="投稿画像" horizontal>
-                    <input type="file" ref="preview" @change="uploadFile">
+                <b-field class="shop-info" label="投稿画像1" horizontal>
+                    <input type="file" ref="preview0" @change="uploadFile(0)">
+                </b-field>
+                <b-field v-if="addedImagesFilesNum >= 1" class="shop-info" label="投稿画像2" horizontal>
+                    <input type="file" ref="preview1" @change="uploadFile(1)">
+                </b-field>
+                <b-field v-if="addedImagesFilesNum >= 2" class="shop-info" label="投稿画像3" horizontal>
+                    <input type="file" ref="preview2" @change="uploadFile(2)">
                 </b-field>
             </section>
 
@@ -45,14 +51,14 @@
                 </b-field>
                 
                 <div class="is-flex food-photos">
-                    <div v-if="url" class="is-flex image is-128x128 food-photo">
-                        <img :src="url">
+                    <div v-if="urls[0]" class="is-flex image is-128x128 food-photo">
+                        <img :src="urls[0]">
                     </div>
-                    <div v-if="url" class="is-flex image is-128x128 food-photo">
-                        <img :src="url">
+                    <div v-if="urls[1]" class="is-flex image is-128x128 food-photo">
+                        <img :src="urls[1]">
                     </div>
-                    <div v-if="url" class="is-flex image is-128x128 food-photo">
-                        <img :src="url">
+                    <div v-if="urls[2]" class="is-flex image is-128x128 food-photo">
+                        <img :src="urls[2]">
                     </div>
                 </div>
             </section>
@@ -87,8 +93,9 @@ export default {
             member: "",
             recommend: "",
             share: false,
-            fileImg: null,
-            url: "",
+            fileImgs: [], //複数個を想定して初期値を配列に変更
+            urls: [], //同上
+            addedImagesFilesNum: 0, //画像を何枚アップしたかを数えて、アップロードボタンを次々にだす
             isLoading: false,
             userName: this.$store.state.uname,
         }
@@ -141,14 +148,28 @@ export default {
             // firestoreへデータ追加
             const docRef = doc(collection(db, 'infos'))
 
-            let imageUrl = ""
+            let imageUrls = []
 
-            if(this.fileImg){
+            if(this.fileImgs.length > 0){
+                //画像が1枚以上あるとき、storageにアップロードをする
+                // 画像の個数分だけアップロードの作業が必要になるので、map文で処理する。
                 // storageに画像をあげる
-                const imageRef = storageRef(storage, `images/${docRef.id}`)
-                await uploadBytes(imageRef, this.fileImg)
+                imageUrls = await Promise.all(this.fileImgs.map(async (file, index) => {
+                    let imageRef = storageRef(storage, `images/${ docRef.id }_${ index }`)
+                    //refの文字列は被ると上書きになってしまうので、インデックス番号をつかって分ける
+                    await uploadBytes(imageRef, file) //それぞれのrefに向けてアップロード
+                    let imageUrl = await getDownloadURL(imageRef)
+                    return imageUrl
 
-                imageUrl = await getDownloadURL(imageRef)
+                }))
+
+                console.log(imageUrls)
+                console.log(imageUrls[1])
+
+                // 以下は、画像がひとつだったときの書き方（参考に残してます）
+                // const imageRef = storageRef(storage, `images/${ docRef.id }`)
+                // await uploadBytes(imageRef, this.fileImg)
+                // imageUrl = await getDownloadURL(imageRef)
             }
 
 
@@ -164,7 +185,7 @@ export default {
                 member: this.member,
                 recommend: this.recommend,
                 share: this.share,
-                imageUrl: imageUrl,
+                imageUrl: imageUrls,
                 userName: this.$store.state.uname,
             })
             console.log('Document written with ID: ', docRef.id)
@@ -174,21 +195,25 @@ export default {
             this.$router.push("/mypage")
 
         },
-        uploadFile(){
-            const file = this.$refs.preview
+        uploadFile(num){
+            //画像をURL化したあと、urlsの配列に追加していくようなロジックに変更。引数に数字をいれることで何番目の画像かわかるようにする
+            const file = this.$refs[`preview${ num }`]
             const fileImg = file.files[0]
             if(!fileImg) {
                 return
             }
-            this.fileImg = fileImg
+            this.fileImgs[num] = fileImg
 
             const reader = new FileReader()
 
             reader.onload = (e) => {
-                this.url = e.target.result
+                this.urls[num] = e.target.result
+                console.log(this.urls)
+                this.addedImagesFilesNum++ //次のアップロードボタンを表示させる
             }
 
             reader.readAsDataURL(fileImg)
+            // これで、配列のnum番目に画像のurlが入ることになる
         }
     }
 }
