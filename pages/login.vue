@@ -1,11 +1,5 @@
 <template>
     <section>
-        <section class="main-text">
-            <h1 class="title">美味しかったグルメやお店を簡単に記録</h1>
-            <p>グルメモを使えば、美味しかったグルメやお気に入りのお店を簡単に記録することができます。</p>
-            <h1 class="title">おすすめのグルメやお店を他の人にもシェア</h1>
-            <p>ボタン1つで、他のグルメモユーザーにおすすめのグルメやお店をシェアすることができます。</p>
-        </section>
         <section class="section container column is-half login-info">
             <b-field label="Username">
                 <b-input v-model="userName">
@@ -51,9 +45,7 @@ export default {
             email: "",
             password: "",
             // Loading UIの表示
-            isLoading: false,
-            
-
+            isLoading: false
         }
     },
     methods: {
@@ -157,19 +149,6 @@ export default {
 </script>
 
 <style>
-.main-text, .main-text .title {
-    margin-top: 20px;
-    margin-bottom: 0;
-    color: #267853;
-    text-align: center;
-}
-
-.main-text p {
-    font-weight: bold;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
 .login-info {
     margin-bottom: 0;
     padding: 30px;

@@ -29,7 +29,7 @@
             <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/contact'}">
               お問合わせ
             </b-navbar-item>
-            <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/login'}">
+            <b-navbar-item class="nav-item" tag="router-link" :to="{path:'/'}">
               ログアウト
             </b-navbar-item>
       </div>
@@ -65,13 +65,23 @@ export default {
 </script>
 
 <style>
+  .navbar {
+    padding: 13px 10px;
+  }
   .user-name {
     margin: auto 20px;
   }
-
   .nav-item {
     font-weight: bold;
     color: white;
+    border-left: 1px solid white;
+  }
+  .nav-item:hover {
+    color: #267853 !important;
+    background-color: white;
+  }
+  a.navbar-item:focus, a.navbar-item:focus-within {
+    color: #267853 !important;
   }
   .main-title .navbar-item {
     padding: 0;

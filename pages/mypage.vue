@@ -300,4 +300,13 @@ export default {
     .item {
         margin-top: 52px;
     }
+    .select:not(.is-multiple):not(.is-loading)::after {
+        border-color: #267853 !important;
+    }
+    .select select, .taginput .taginput-container.is-focusable, .textarea, .input{
+        border-color:#267853 !important;
+    }
+    .select:not(.is-multiple):not(.is-loading):hover::after {
+        border-color: #267853 !important;
+    }
 </style>

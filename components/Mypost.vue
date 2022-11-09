@@ -17,13 +17,13 @@
             <b-field class="mypost-item" label="おすすめ" horizontal>{{ item.recommend }}</b-field>
         </div>
         <div class="is-flex mypost-items photos">
-            <figure class="image">
+            <figure class="image is-128x128">
                 <img v-bind:src="item.imageUrl[0]">
             </figure>
-            <figure class="image">
+            <figure class="image is-128x128">
                 <img v-bind:src="item.imageUrl[1]">
             </figure>
-            <figure class="image">
+            <figure class="image is-128x128">
                 <img v-bind:src="item.imageUrl[2]">
             </figure>
         </div>
@@ -50,7 +50,7 @@ export default {
 
 <style>
     .mypost {
-        margin-top: 50px;
+        margin-top: 80px;
         margin-bottom: 80px;
         padding-bottom: 30px;
         border-bottom: 3px double #8c8b8b;
@@ -74,13 +74,15 @@ export default {
     }
     .image {
         position: relative;
-        margin-right: 5px;
-        min-width: 200px;
+        margin-right: 0px;
     }
-    img {
+    .image img {
         position: absolute;
         top: 50%;
         transform: translate(0, -50%);
         max-width: 100%;
+        height: 150px;
+        object-fit: contain;
+        border: solid 1px green;
     }
 </style>

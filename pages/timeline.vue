@@ -68,7 +68,7 @@ export default {
     },
     async created () {
         const docRef = collection(db, 'infos')
-        const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true))
+        const docQuery = query(docRef, where("share", "==", true))
         const docSnap = await getDocs(docQuery)
 
         this.infos = docSnap.docs.map(d => {
@@ -108,7 +108,7 @@ export default {
             } else if(this.selectedGenre !== "") {
                 const docRef = collection(db, 'infos')
                 console.log("初期", this.infos)
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("genre", "==", this.selectedGenre), where("area", "==", this.selectedArea))
+                const docQuery = query(docRef, where("share", "==", true), where("genre", "==", this.selectedGenre), where("area", "==", this.selectedArea))
                 const docSnap = await getDocs(docQuery)
 
                 this.infos = docSnap.docs.map(d => {
@@ -120,7 +120,7 @@ export default {
             } else {
                 const docRef = collection(db, 'infos')
                 console.log("初期", this.infos)
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea))
+                const docQuery = query(docRef, where("share", "==", true), where("area", "==", this.selectedArea))
                 const docSnap = await getDocs(docQuery)
 
                 this.infos = docSnap.docs.map(d => {
@@ -135,7 +135,7 @@ export default {
                 alert("ジャンルを選択してください")
             } else if(this.selectedArea !== "") {
                 const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("area", "==", this.selectedArea), where("genre", "==", this.selectedGenre))
+                const docQuery = query(docRef, where("share", "==", true), where("area", "==", this.selectedArea), where("genre", "==", this.selectedGenre))
                 const docSnap = await getDocs(docQuery)
 
                 this.infos = docSnap.docs.map(d => {
@@ -146,7 +146,7 @@ export default {
                 console.log("selectedGenre", this.selectedGenre)
             } else {
                 const docRef = collection(db, 'infos')
-                const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true), where("genre", "==", this.selectedGenre))
+                const docQuery = query(docRef, where("share", "==", true), where("genre", "==", this.selectedGenre))
                 const docSnap = await getDocs(docQuery)
 
                 this.infos = docSnap.docs.map(d => {
@@ -161,7 +161,6 @@ export default {
             const docRef = collection(db, 'infos')
             const docQuery = query(
                 docRef,
-                where("userId", "==", this.$store.state.uid),
                 where("share", "==", true),
                 ...this.whereQueris,
                 orderBy("rate", "desc"))
@@ -214,7 +213,6 @@ export default {
                 const docRef = collection(db, 'infos')
                 const docQuery = query(
                     docRef,
-                    where("userId", "==", this.$store.state.uid),
                     where("share", "==", true),
                     ...this.whereQueris,
                     orderBy("date", "desc"))
@@ -267,7 +265,7 @@ export default {
             this.selectedArea = ""
             this.selectedGenre = ""
             const docRef = collection(db, 'infos')
-            const docQuery = query(docRef, where("userId", "==", this.$store.state.uid), where("share", "==", true))
+            const docQuery = query(docRef, where("share", "==", true))
             const docSnap = await getDocs(docQuery)
 
             this.infos = docSnap.docs.map(d => {
@@ -278,3 +276,21 @@ export default {
     }
 }
 </script>
+
+<style>
+    .sort-area {
+        text-align: center;
+        margin: 20px auto;
+    }
+    .sort-items {
+        margin-bottom: 0;
+        align-items: flex-end;
+    }
+    .sort-item {
+        width: 235px;
+        margin-bottom: 0;
+    }
+    .item {
+        margin-top: 52px;
+    }
+</style>

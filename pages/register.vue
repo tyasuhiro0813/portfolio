@@ -7,19 +7,19 @@
             </section>
             <section class="section container column is-half shop-infos">
                 <b-field class="shop-info" label="店名" horizontal>
-                    <b-input v-model="name"></b-input>
+                    <b-input placeholder="鳥貴族" v-model="name"></b-input>
                 </b-field>
 
                 <b-field class="shop-info" label="エリア" horizontal>
-                    <b-input v-model="area"></b-input>
+                    <b-input placeholder="東京　新宿" v-model="area"></b-input>
                 </b-field>
 
                 <b-field class="shop-info" label="ジャンル" horizontal>
-                    <b-input v-model="genre"></b-input>
+                    <b-input placeholder="居酒屋" v-model="genre"></b-input>
                 </b-field>
 
                 <b-field class="shop-info" label="おすすめ" horizontal>
-                    <b-input v-model="recommend"></b-input>
+                    <b-input placeholder="やきとり" v-model="recommend"></b-input>
                 </b-field>
 
                 <b-field class="shop-info" label="投稿画像1" horizontal>
@@ -34,30 +34,31 @@
             </section>
 
             <section class="section container column is-half shop-infos">
-                <b-field class="shop-info" label="来店日" horizontal>
-                    <b-datepicker v-model="date"></b-datepicker>
-                </b-field>
+                <div>
+                    <b-field class="shop-info" label="来店日" horizontal>
+                        <b-datepicker v-model="date"></b-datepicker>
+                    </b-field>
 
-                <b-field class="shop-info" label="来店時間" horizontal>
-                    <b-timepicker v-model="time"></b-timepicker>
-                </b-field>
+                    <b-field class="shop-info" label="来店時間" horizontal>
+                        <b-timepicker v-model="time"></b-timepicker>
+                    </b-field>
 
-                <b-field class="shop-info" label="来店人数" horizontal>
-                    <b-input v-model="member"></b-input>
-                </b-field>
+                    <b-field class="shop-info" label="来店人数" horizontal>
+                        <b-input v-model="member"></b-input>
+                    </b-field>
 
-                <b-field class="shop-info rates" label="評価" horizontal>
-                    <b-rate v-model="rate"></b-rate>
-                </b-field>
-                
+                    <b-field class="shop-info rates" label="評価" horizontal>
+                        <b-rate v-model="rate"></b-rate>
+                    </b-field>
+                </div>
                 <div class="is-flex food-photos">
-                    <div v-if="urls[0]" class="is-flex image is-128x128 food-photo">
+                    <div v-if="urls[0]" class="image is-128x128 food-photo">
                         <img :src="urls[0]">
                     </div>
-                    <div v-if="urls[1]" class="is-flex image is-128x128 food-photo">
+                    <div v-if="urls[1]" class="image is-128x128 food-photo">
                         <img :src="urls[1]">
                     </div>
-                    <div v-if="urls[2]" class="is-flex image is-128x128 food-photo">
+                    <div v-if="urls[2]" class="image is-128x128 food-photo">
                         <img :src="urls[2]">
                     </div>
                 </div>
@@ -230,14 +231,25 @@ export default {
         margin: 10px 0;
         padding: 10px 0;
     }
-    .food-photos {
-        align-items: center;
-    }
-    .food-photo {
-        min-width: 150px;
-        margin: 0 auto;
-    }
     .rates {
         margin-top: 20px;
+    }
+    .food-photos {
+        margin-top: 35px;
+    }
+    .food-photo {
+        margin: 0 auto;
+        position: relative;
+    }
+    .food-photo img {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        max-width: 100%;
+        height: 160px;
+        object-fit: contain;
+    }
+    .switch input[type=checkbox]:checked + .check.is-dark {
+        background: #267853 !important;
     }
 </style>

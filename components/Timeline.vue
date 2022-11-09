@@ -22,13 +22,13 @@
             </div>
             <div class="is-flex post-items photos">
                 <figure class="image is-128x128">
-                    <img v-bind:src="item.imageUrl">
+                    <img v-bind:src="item.imageUrl[0]">
                 </figure>
                 <figure class="image is-128x128">
-                    <img v-bind:src="item.imageUrl">
+                    <img v-bind:src="item.imageUrl[1]">
                 </figure>
                 <figure class="image is-128x128">
-                    <img v-bind:src="item.imageUrl">
+                    <img v-bind:src="item.imageUrl[2]">
                 </figure>
             </div>
         </section>
@@ -55,7 +55,7 @@ export default {
 
 <style>
     .post {
-        margin-top: 0px;
+        margin-top: 20px;
         margin-bottom: 80px;
         padding-bottom: 30px;
         border-bottom: 3px double #8c8b8b;
@@ -81,17 +81,21 @@ export default {
         position: relative;
         margin-right: 5px;
     }
-    img {
+    .image img {
         position: absolute;
         top: 50%;
         transform: translate(0, -50%);
+        max-width: 100%;
+        height: 150px;
+        object-fit: contain;
+        border: solid 1px green;
     }
     .name
     {
         margin-top: 50px;
         margin-bottom: 10px;
         padding-left: 25px;
-        font-size: 18px;
+        font-size: 20px;
     }
     .name span {
         font-weight: bold;
