@@ -48,7 +48,6 @@
                 })
                 this.isLoading = false
                 alert("送信しました。")
-                console.log(result)
             }
         }
     }

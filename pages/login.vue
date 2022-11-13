@@ -61,7 +61,6 @@ export default {
             this.isLoading = true
             signInWithEmailAndPassword(auth, this.email, this.password) 
             .then((user)=> {
-                console.log(user)
                 // storeにuseridを入れる
                 this.$store.commit("setUid", user.user.uid)
                 sessionStorage.setItem('portfolioID', user.user.uid)
@@ -73,7 +72,6 @@ export default {
                 this.$router.push("/register")
             })
             .catch((error)=> {
-                console.log(error)
                 this.isLoading = false
                 alert("ログインに失敗しました。")
             })
@@ -92,7 +90,6 @@ export default {
                 return
             }
             this.isLoading = true
-            console.log(this.userName, this.email, this.password)
             createUserWithEmailAndPassword(auth, this.email, this.password)
             .then(async(user) => {
                 await updateProfile(auth.currentUser, {
@@ -110,8 +107,6 @@ export default {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // ..
-                console.log(error)
                 this.isLoading = false
                 alert("新規登録に失敗しました。")
             });
@@ -121,7 +116,6 @@ export default {
             const provider = new GoogleAuthProvider();
             signInWithPopup(auth, provider)
             .then(async result => {
-                console.log({ result })
                 const user = result.user
                 await updateProfile(auth.currentUser, {
                     displayName: user.displayName
@@ -135,16 +129,11 @@ export default {
                 this.$router.push("/register")
             })
             .catch((error)=> {
-                console.log(error)
                 this.isLoading = false
                 alert("ログインに失敗しました。")
             })
         }
-    },
-    mounted() {
-        console.log("uid", this.$store.state.uid)
-        console.log("uname", this.$store.state.uname)
-    },    
+    } 
 }
 </script>
 

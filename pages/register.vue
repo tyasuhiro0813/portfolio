@@ -104,9 +104,6 @@ export default {
     mounted() {
         const sessionStorageID = sessionStorage.getItem('portfolioID')
         const sessionStorageUser = sessionStorage.getItem('portfolioUser')
-        console.log("userID" ,this.$store.state.uid)
-        console.log("userName", sessionStorageUser)
-        console.log("portfolioID", sessionStorageID)
     },
     methods: {
         async register(){
@@ -142,10 +139,7 @@ export default {
                 alert("未入力項目があります。")
                 return
             }
-            // console.log(this.name, this.rate, this.date, this.time, this.share)
             this.isLoading = true
-            console.log(this.isLoading)
-            
             // firestoreへデータ追加
             const docRef = doc(collection(db, 'infos'))
 
@@ -163,14 +157,6 @@ export default {
                     return imageUrl
 
                 }))
-
-                console.log(imageUrls)
-                console.log(imageUrls[1])
-
-                // 以下は、画像がひとつだったときの書き方（参考に残してます）
-                // const imageRef = storageRef(storage, `images/${ docRef.id }`)
-                // await uploadBytes(imageRef, this.fileImg)
-                // imageUrl = await getDownloadURL(imageRef)
             }
 
 
@@ -189,8 +175,6 @@ export default {
                 imageUrl: imageUrls,
                 userName: this.$store.state.uname,
             })
-            console.log('Document written with ID: ', docRef.id)
-
             this.isLoading = false
             alert("お店を登録しました。")
             this.$router.push("/mypage")
@@ -209,7 +193,6 @@ export default {
 
             reader.onload = (e) => {
                 this.urls[num] = e.target.result
-                console.log(this.urls)
                 this.addedImagesFilesNum++ //次のアップロードボタンを表示させる
             }
 

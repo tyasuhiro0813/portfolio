@@ -47,18 +47,6 @@ export default {
   data () {
     return {
       userName: this.$store.state.uname,
-      // items: [
-      //   {
-      //     title: 'Home',
-      //     icon: 'home',
-      //     to: { name: 'index' }
-      //   },
-        // {
-        //   title: 'Inspire',
-        //   icon: 'lightbulb',
-        //   to: { name: 'inspire' }
-        // }
-      // ]
     }
   }
 }

@@ -1,8 +1,7 @@
 export default function({ store, route, redirect }){
     const path = route.name
-    console.log(path)
 
-    if(path === "login"){
+    if(path === "index" || path === "login"){
         return
     }
     else {
@@ -16,8 +15,8 @@ export default function({ store, route, redirect }){
         }
 
         if(userId === "" && storageID === null){
-            alert("ログインしてください。")
-            return redirect("/login")
+            // alert("ログインしてください。")
+            return redirect("/")
         }
     }
 }
