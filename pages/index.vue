@@ -39,7 +39,6 @@ export default {
   }
 
   .index-main-text {
-    /* margin-top: 20px; */
     margin-bottom: 15px;
     color: #267853;
     text-align: center;

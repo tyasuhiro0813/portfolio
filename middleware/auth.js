@@ -15,7 +15,6 @@ export default function({ store, route, redirect }){
         }
 
         if(userId === "" && storageID === null){
-            // alert("ログインしてください。")
             return redirect("/")
         }
     }
