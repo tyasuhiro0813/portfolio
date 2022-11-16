@@ -1,9 +1,13 @@
 import * as functions from "firebase-functions";
-
+const axios = require("axios")
 // // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+export const getContactMessage = functions
+    .runWith({
+        secrets: ['SLACK_API_URL']
+    })
+    .https.onCall(async (data, context) => {
+        const { name, email, contact } = data
+        const slackApiUrl = process.env.SLACK_API_URL || ""
+    await axios.post(slackApiUrl, {text: `お問い合わせ: ${name}, ${email}, ${contact}`})
+    return "OK"
+    });

@@ -3,19 +3,14 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage"
+import { getFunctions } from "firebase/functions"
+import firebaseConfig from "../firebaseConfig.json"
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCOTwdTzisMuF9k08FDlEJSYyDgP40RzEg",
-  authDomain: "portfolio-f5e64.firebaseapp.com",
-  projectId: "portfolio-f5e64",
-  storageBucket: "portfolio-f5e64.appspot.com",
-  messagingSenderId: "979476294638",
-  appId: "1:979476294638:web:b27e0b35ba3e9354ea3cff"
-};
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -28,6 +23,8 @@ const auth = getAuth(app);
 
 const storage = getStorage(app);
 
+const functions = getFunctions(app);
+
 export {
-    db, auth, storage
+    db, auth, storage, functions
 }

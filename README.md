@@ -1,69 +1,59 @@
-# portfolio
+# 【Vue.js, Nuxt.js, Firebase】お気に入りの飲食店を簡単に記録できるアプリ
 
-## Build Setup
+## はじめに
 
-```bash
-# install dependencies
-$ npm install
+こちらでは、Vue.js, Nuxt.js, Firebaseを用いて開発したポートフォリオについて説明します。
+機能の追加や修正は随時対応中です。（2022年11月16日現在）
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## アプリの概要
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+自分のお気に入りの飲食店を簡単に記録し、他のユーザーとシェアできるサービスです。
 
-# generate static project
-$ npm run generate
-```
+## 想定ユーザー
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
-
-## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+・自分が行って気に入った飲食店を記録しておきたい方
+・他の人と美味しい飲食店の情報をシェアしたい方
+・食を通じて他の人と繋がりたい方
 
 
-### `pages`
+## アプリの制作背景
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+私の妻は食べることが好きで、美味しいお店を見つけると、Google Mapでお気に入り登録し、リンクを私に送ってくれます。
+リンクを開くと最初にGoogle Mapが起動し、そのお店の位置情報が表示されます。
+「人気メニューは何か？」「メニューは何があるのか？」「評価はどれくらいか？」などを見るには、
+位置情報と一緒に記載の情報から各情報を探す必要があり、面倒だと感じることが多々あります。
+そこで、
+「お店の情報が簡単に記録できる」「あとで見返したときに、一目で欲しい情報がわかる」「他の人にも簡単にシェアできる」
+そんなアプリが欲しいと思い、制作いたしました。
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
 
-### `plugins`
+## 使用技術
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+・nuxt 2.15.8
+・Vue 2.6.14
+・Buefy
+・CSS
+・Firebase（Firestore, Authentication, Functions, Storage, Hosting）
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
 
-### `static`
+# ↓↓以下作成中↓↓
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
 
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
+## アプリの操作方法
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
+### `1.トップページ`
 
-### `store`
+### `2.ユーザー登録, ログイン`
 
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
+### `3.飲食店の登録`
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+### `4.登録した飲食店の情報を見る`
+
+### `5.他のユーザーが登録した情報を見る`
+
+### `6.問い合わせ`
+
+### `7.ログアウト`
+
+
+## 機能一覧
