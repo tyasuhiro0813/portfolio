@@ -1,5 +1,7 @@
 # 【Vue.js, Nuxt.js, Firebase】お気に入りの飲食店を簡単に記録できるアプリ
 
+![Image from Gyazo](https://t.gyazo.com/teams/tyasuhiro/126b751d60ac8604d722ed1e7eb4a390.png)](https://tyasuhiro.gyazo.com/126b751d60ac8604d722ed1e7eb4a390)
+
 ## はじめに
 
 こちらでは、Vue.js, Nuxt.js, Firebaseを用いて開発したポートフォリオについて説明します。
@@ -9,11 +11,12 @@
 
 自分のお気に入りの飲食店を簡単に記録し、他のユーザーとシェアできるサービスです。
 
+
 ## 想定ユーザー
 
-・自分が行って気に入った飲食店を記録しておきたい方
-・他の人と美味しい飲食店の情報をシェアしたい方
-・食を通じて他の人と繋がりたい方
+* 自分が行って気に入った飲食店を記録しておきたい方
+* 他の人と美味しい飲食店の情報をシェアしたい方
+* 食を通じて他の人と繋がりたい方
 
 
 ## アプリの制作背景
@@ -29,25 +32,61 @@
 
 ## 使用技術
 
-・nuxt 2.15.8
-・Vue 2.6.14
-・Buefy
-・CSS
-・Firebase（Firestore, Authentication, Functions, Storage, Hosting）
+* nuxt 2.15.8
+* Vue 2.6.14
+* Buefy
+* CSS
+* Firebase（Firestore, Authentication, Functions, Storage, Hosting）  
 
 
-# ↓↓以下作成中↓↓
+# ↓↓以下作成中↓↓  
+
+
+## 機能一覧
+
+| # | 機能 |
+| :------------------: | :----------------------------: |
+| 1 | ユーザー登録/ログイン | 
+| 2 |  |
+| 3 |  |
 
 
 ## アプリの操作方法
 
 ### `1.トップページ`
 
+[![Image from Gyazo](https://t.gyazo.com/teams/tyasuhiro/87f3bf3ac5273c1550b0443863312814.gif)](https://tyasuhiro.gyazo.com/87f3bf3ac5273c1550b0443863312814)
+
+* トップページにアクセスすると、上記の画面が表示されます
+* 「新規登録/ログインして始める」のボタンを押すと、新規登録/ログイン画面に遷移します
+
 ### `2.ユーザー登録, ログイン`
 
-### `3.飲食店の登録`
+**2-1. メールアドレス/パスワードによるユーザー登録/ログイン**  
+[![Image from Gyazo](https://t.gyazo.com/teams/tyasuhiro/c8181a377cc9ee578e787d7ff030ee13.gif)](https://tyasuhiro.gyazo.com/c8181a377cc9ee578e787d7ff030ee13)  
+* 動画のように、ユーザーネーム, メールアドレス, パスワードを入力し、「SignUp」ボタンを押す
+* 既にユーザー登録が完了している場合は、入力完了後に「Login」ボタンを押す
+* ユーザー登録/ログインに成功すると、動画のようにお店登録のページに遷移
+* ログインすると、ヘッダー部分に登録したユーザーネームが表示されます
+
+**2-2. Googleアカウントを利用したユーザー登録/ログイン**  
+[![Image from Gyazo](https://t.gyazo.com/teams/tyasuhiro/fdf63fd6217c12fd4ef0614a5f679dcc.gif)](https://tyasuhiro.gyazo.com/fdf63fd6217c12fd4ef0614a5f679dcc)  
+* Googleアカウントでユーザー登録/ログインする場合は、「SignUp・Login with Google」ボタンを押す
+* ユーザー登録/ログインに成功すると、動画のようにお店登録のページに遷移
+* ログインすると、ヘッダー部分にGoogleアカウントで登録しているユーザーネームが表示されます
+
+### `3.お店の登録`
+[![Image from Gyazo](https://t.gyazo.com/teams/tyasuhiro/ef83e7f83e4486bec1b3633d293e1740.gif)](https://tyasuhiro.gyazo.com/ef83e7f83e4486bec1b3633d293e1740)
+* 登録に必要なお店の情報を入力したら、「お店を登録」ボタンを押す。  
+  他のユーザーにお店の情報をシェアする場合は、「タイムラインで他のユーザーにシェア」スイッチをONにする。
+* 画像は無くてもお店の登録は可能
+* 登録が完了すると、Myページに遷移する
 
 ### `4.登録した飲食店の情報を見る`
+[![Image from Gyazo](https://t.gyazo.com/teams/tyasuhiro/e3fbb60b8cfbe07f3d5310f5c3809d2f.gif)](https://tyasuhiro.gyazo.com/e3fbb60b8cfbe07f3d5310f5c3809d2f)
+* Myページから自分が登録したお店の情報を見ることができる
+* 見たいお店の条件でソートや並び替えをすることができ、複数条件でのソート/並び替えも可能。  
+  ソート/並び替えを解除したい場合は、「ソート・並べ替え解除」ボタンを押すと解除される。
 
 ### `5.他のユーザーが登録した情報を見る`
 
@@ -56,4 +95,3 @@
 ### `7.ログアウト`
 
 
-## 機能一覧
